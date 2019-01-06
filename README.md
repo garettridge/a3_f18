@@ -32,7 +32,7 @@ Implement the assignment in clean and understandable code. Each required part mu
 
    **Remember**, not just any image that you download will work.  Images used for texture maps in WebGL 1.0 must be square and have power of two dimensions (therefore only square images of a few limited sizes like 128x128 and 256x256 are valid).  WebGL 2.0 doesn't have this limitation but it also isn't widely supported on phones yet so we don't use it.
 
-   To load a texture into a `Material`, assign a new value to the `Material` object called `"texture"`.  To assign `"texture"` with the right value, use one of our functions that returns a reference to an image file.  Load your image using the function `get_instance` (which makes sure the program only tries to load the file once even if you request it multiple times), found in class `Webgl_Manager` from `tiny-graphics.js`.  The syntax you'll use is `context.get_instance( "assets/your filename", use_mipMap )` where `use_mipMap` is a boolean that gets passed on to the `Texture` class.  You can read the class `Texture` to see what this boolean does; it determines which built-in WebGL functions are called to set the texture sampling method.  The boolean defaults to `true` if you omit it.  For a sampling method, class `Texture` offers a choice between tri-linear (best) or nearest-neighbor (worst but simple).
+   To load a texture into a `Material`, assign a new value to the `Material` object called `"texture"`.  To assign `"texture"` with the right value, use one of our functions that returns a reference to an image file.  Load your image using the function `get_instance` (which makes sure the program only tries to load the file once even if you request it multiple times), found in class `Webgl_Manager` from `tiny-graphics.js`.  The syntax you'll use is `context.get_instance( "assets/your filename", true or false )` where the boolean value will be passed on to the `Texture` class to enable or disable mipmapping.  You can read the class `Texture` to see what this boolean does; it determines which built-in WebGL functions are called to set the texture sampling method.  The boolean defaults to `true` if you omit it.  For a sampling method, class `Texture` offers a choice between tri-linear (best) or nearest-neighbor (worst but simple).
 
    A `Texture`'s color is scaled by the Phong formula's ambient weight.  Make your image match its original colors this time, by setting the ambient `color` to opaque black and the `ambient` coefficient to 1.  (FYI, images with transparent pixels are accounted for in the formula too -- the shape's base color affects the texture's color additively, but the transparencies combine multiplicatively).
 
@@ -46,7 +46,7 @@ Implement the assignment in clean and understandable code. Each required part mu
 
 6. Use continuous scrolling the texture map on cube #2. Translate the texture varying the s texture coordinate by 2 texture units per second, causing it to slide along the box faces.  Reset the texture coordinates passed into the GLSL's `texture2D` call periodically so they do not continue to grow forever, which could cause the interpolated values to lose needed decimal precision **- 5 points**
 
-   To code this part, fill in class `Texture_Scroll_X` which will be a modification of `Phong_Shader`, overwriting its `fragment_glsl_code` function to give it new fragment shader code.  Use that shader instead of `Phong_Shader` for cube #1.  
+   To code this part, fill in class `Texture_Scroll_X` which will be a modification of `Phong_Shader`, overwriting its `fragment_glsl_code` function to give it new fragment shader code.  Use that shader instead of `Phong_Shader` for cube #2.
 
    Note 1: In the fragment shader, the varying "`f_tex_coord`" stores the vec2 of pre-interpolated texture coordinates.
 
@@ -56,7 +56,7 @@ Implement the assignment in clean and understandable code. Each required part mu
 
 7. Rotate the texture map itself on all faces of cube #1 around the center of each face at a rate of 15 rpm.  As with #6, prevent the rotation angle from growing excessively as `animation_time` grows **- 5 points**
 
-   To code this part, fill in class `Texture_Rotate` which will be a modification of `Phong_Shader`, overwriting its `fragment_glsl_code` function to give it new fragment shader code.  Use that shader instead of `Phong_Shader` for cube #2.
+   To code this part, fill in class `Texture_Rotate` which will be a modification of `Phong_Shader`, overwriting its `fragment_glsl_code` function to give it new fragment shader code.  Use that shader instead of `Phong_Shader` for cube #1.
 
 #### Extra Credit: Each can be attempted individually. There is no partial credit on any individual extra credit.
 
